@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earth Gang × Mamaearth — Join the Movement</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#060a06;
+  --surface:#0d130d;
+  --surface2:#121a12;
+  --border:#1c2b1c;
+  --green:#3d7a4a;
+  --green2:#52a364;
+  --green3:#1e3523;
+  --greenlt:#9dd4ad;
+  --greenxlt:#d0ecda;
+  --text:#eef4ef;
+  --muted:#7a9a80;
+  --dimmed:#3a5040;
+  --accent:#a8e6b8;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* ── NOISE TEXTURE ── */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9999;opacity:.6;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;
+  z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.25rem 3rem;
+  background:rgba(6,10,6,.85);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(61,122,74,.15);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;font-size:1.1rem;
+  color:var(--text);letter-spacing:-.02em;
+  display:flex;align-items:center;gap:10px;
+}
+.nav-logo .leaf{
+  width:28px;height:28px;background:var(--green3);border:1px solid var(--green);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+}
+.nav-links{display:flex;gap:2rem;align-items:center}
+.nav-links a{
+  font-size:.85rem;color:var(--muted);text-decoration:none;
+  letter-spacing:.04em;transition:color .2s;
+}
+.nav-links a:hover{color:var(--greenlt)}
+.nav-cta{
+  background:var(--green);color:var(--text);
+  font-family:'Syne',sans-serif;font-weight:600;font-size:.8rem;
+  padding:.6rem 1.4rem;border-radius:100px;
+  text-decoration:none;letter-spacing:.04em;
+  border:none;cursor:pointer;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--green2);transform:translateY(-1px)}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  text-align:center;
+  padding:7rem 2rem 4rem;
+  position:relative;
+  overflow:hidden;
+}
+.hero-orb{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(80px);
+  pointer-events:none;
+}
+.orb1{width:500px;height:500px;background:radial-gradient(circle,rgba(61,122,74,.35) 0%,transparent 70%);top:-100px;left:-100px;}
+.orb2{width:400px;height:400px;background:radial-gradient(circle,rgba(82,163,100,.2) 0%,transparent 70%);bottom:0;right:-80px;}
+.orb3{width:300px;height:300px;background:radial-gradient(circle,rgba(168,230,184,.1) 0%,transparent 70%);top:40%;left:50%;transform:translateX(-50%);}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--green3);border:1px solid var(--green);
+  border-radius:100px;padding:.4rem 1rem;
+  font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--greenlt);margin-bottom:2rem;
+  animation:fadeUp .6s ease forwards;
+}
+.hero-eyebrow span{width:6px;height:6px;border-radius:50%;background:var(--green2);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+h1.hero-title{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:clamp(3rem,9vw,7rem);
+  line-height:.95;
+  letter-spacing:-.03em;
+  color:var(--text);
+  margin-bottom:1.5rem;
+  animation:fadeUp .6s ease .1s both;
+}
+h1.hero-title .green{color:var(--green2)}
+h1.hero-title .outline{
+  -webkit-text-stroke:1px var(--green2);
+  color:transparent;
+}
+
+.hero-sub{
+  font-size:1.05rem;color:var(--muted);
+  max-width:520px;line-height:1.7;
+  margin-bottom:3rem;
+  animation:fadeUp .6s ease .2s both;
+}
+
+.hero-ctas{
+  display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;
+  animation:fadeUp .6s ease .3s both;
+}
+.btn-primary{
+  background:var(--green2);color:var(--bg);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:.9rem;
+  padding:.9rem 2.2rem;border-radius:100px;
+  text-decoration:none;letter-spacing:.03em;
+  border:none;cursor:pointer;
+  transition:all .2s;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(82,163,100,.3)}
+.btn-outline{
+  background:transparent;color:var(--greenlt);
+  font-family:'Syne',sans-serif;font-weight:600;font-size:.9rem;
+  padding:.9rem 2.2rem;border-radius:100px;
+  text-decoration:none;letter-spacing:.03em;
+  border:1px solid var(--green);cursor:pointer;
+  transition:all .2s;
+}
+.btn-outline:hover{background:var(--green3);transform:translateY(-2px)}
+
+.hero-stats{
+  display:flex;gap:3rem;margin-top:5rem;
+  animation:fadeUp .6s ease .4s both;
+}
+.hero-stat{text-align:center}
+.hero-stat .num{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:2rem;color:var(--green2);
+}
+.hero-stat .lbl{font-size:.75rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:.2rem}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── MARQUEE ── */
+.marquee-wrap{
+  padding:1.5rem 0;
+  background:var(--green3);
+  border-top:1px solid var(--green);
+  border-bottom:1px solid var(--green);
+  overflow:hidden;white-space:nowrap;
+}
+.marquee-track{
+  display:inline-flex;gap:0;
+  animation:marquee 25s linear infinite;
+}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:.75rem;
+  padding:0 2rem;
+  font-family:'Syne',sans-serif;font-weight:600;
+  font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--greenlt);
+}
+.marquee-dot{width:5px;height:5px;border-radius:50%;background:var(--green2);flex-shrink:0;}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ── SECTION COMMON ── */
+section{padding:6rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{
+  font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--green2);margin-bottom:.75rem;
+  display:flex;align-items:center;gap:8px;
+}
+.section-label::after{content:'';flex:0 0 24px;height:1px;background:var(--green3)}
+h2.section-title{
+  font-family:'Syne',sans-serif;font-weight:800;
+  font-size:clamp(2rem,4vw,3rem);
+  line-height:1.1;letter-spacing:-.02em;
+  color:var(--text);margin-bottom:1rem;
+}
+.section-sub{font-size:1rem;color:var(--muted);line-height:1.7;max-width:560px}
+
+/* ── WHY JOIN ── */
+.why-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1.5px;margin-top:4rem;
+  border:1.5px solid var(--border);border-radius:16px;overflow:hidden;
+}
+.why-card{
+  background:var(--surface);padding:2.5rem 2rem;
+  border-right:1.5px solid var(--border);
+  transition:background .25s;
+  position:relative;overflow:hidden;
+}
+.why-card:last-child{border-right:none}
+.why-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;
+  height:2px;background:transparent;
+  transition:background .25s;
+}
+.why-card:hover{background:var(--surface2)}
+.why-card:hover::before{background:var(--green2)}
+.why-icon{
+  width:44px;height:44px;border-radius:10px;
+  background:var(--green3);border:1px solid var(--green);
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;margin-bottom:1.5rem;
+}
+.why-title{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:1.05rem;color:var(--text);margin-bottom:.6rem;
+}
+.why-body{font-size:.88rem;color:var(--muted);line-height:1.65}
+
+/* ── HOW IT WORKS ── */
+.how-section{background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-top:4rem}
+.step{position:relative;text-align:center;padding:2rem 1rem}
+.step-num{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:4rem;
+  color:var(--green3);line-height:1;margin-bottom:1rem;
+  -webkit-text-stroke:1px var(--green);
+}
+.step-title{font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;color:var(--text);margin-bottom:.5rem}
+.step-body{font-size:.85rem;color:var(--muted);line-height:1.6}
+.step-connector{
+  position:absolute;top:3.5rem;right:-1rem;
+  width:2rem;height:1px;background:var(--green3);
+}
+.step:last-child .step-connector{display:none}
+
+/* ── CREATOR TIERS ── */
+.tiers{display:flex;flex-direction:column;gap:1rem;margin-top:3rem}
+.tier-row{
+  display:flex;align-items:center;gap:1.5rem;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:1.25rem 1.5rem;
+  transition:border-color .2s,background .2s;
+}
+.tier-row:hover{border-color:var(--green);background:var(--surface2)}
+.tier-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.95rem;width:90px;flex-shrink:0}
+.tier-range-pill{
+  background:var(--green3);border:1px solid var(--green);
+  color:var(--greenlt);font-size:.75rem;padding:.25rem .75rem;border-radius:100px;
+  white-space:nowrap;flex-shrink:0;
+}
+.tier-bar-bg{flex:1;height:6px;background:#0d130d;border-radius:3px;overflow:hidden}
+.tier-bar-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--green2));border-radius:3px;transition:width .8s ease}
+.tier-desc{font-size:.82rem;color:var(--muted);width:220px;flex-shrink:0}
+
+/* ── COMMUNITY FORM ── */
+.join-section{
+  background:linear-gradient(135deg,var(--green3) 0%,var(--bg) 60%);
+  border-top:1px solid var(--green);
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.join-section::before{
+  content:'';position:absolute;
+  width:600px;height:600px;border-radius:50%;
+  background:radial-gradient(circle,rgba(61,122,74,.25) 0%,transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.form-card{
+  background:rgba(13,19,13,.8);
+  border:1px solid var(--green);
+  border-radius:20px;
+  padding:3rem;max-width:560px;margin:3rem auto 0;
+  backdrop-filter:blur(12px);
+  position:relative;z-index:1;
+}
+.form-row{margin-bottom:1rem}
+.form-row input,
+.form-row select{
+  width:100%;
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:.85rem 1.1rem;
+  font-family:'DM Sans',sans-serif;
+  font-size:.9rem;color:var(--text);
+  outline:none;transition:border-color .2s;
+}
+.form-row input:focus,
+.form-row select:focus{border-color:var(--green2)}
+.form-row input::placeholder{color:var(--dimmed)}
+.form-row select option{background:var(--bg)}
+.form-two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-submit{
+  width:100%;background:var(--green2);color:var(--bg);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:1rem;
+  padding:1rem;border-radius:100px;border:none;cursor:pointer;
+  letter-spacing:.04em;margin-top:.5rem;
+  transition:all .2s;
+}
+.form-submit:hover{background:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(82,163,100,.4)}
+.form-note{font-size:.75rem;color:var(--dimmed);margin-top:.75rem}
+
+/* ── WHAT YOU GET ── */
+.perks{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:3rem}
+.perk{
+  display:flex;gap:1rem;align-items:flex-start;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:1.25rem;
+  transition:border-color .2s;
+}
+.perk:hover{border-color:var(--green)}
+.perk-icon{
+  width:38px;height:38px;border-radius:8px;
+  background:var(--green3);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.1rem;
+}
+.perk-title{font-family:'Syne',sans-serif;font-weight:600;font-size:.9rem;color:var(--text);margin-bottom:.3rem}
+.perk-body{font-size:.82rem;color:var(--muted);line-height:1.5}
+
+/* ── MANIFESTO ── */
+.manifesto-section{border-top:1px solid var(--border)}
+.manifesto-text{
+  font-family:'Syne',sans-serif;font-weight:700;
+  font-size:clamp(1.5rem,3vw,2.5rem);
+  line-height:1.3;color:var(--text);
+  margin-top:2rem;
+}
+.manifesto-text .hl{color:var(--green2)}
+.manifesto-text .dim{color:var(--dimmed)}
+
+/* ── FOOTER ── */
+footer{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:3rem 2rem;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:1.5rem;
+}
+.footer-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;color:var(--text)}
+.footer-tagline{font-size:.8rem;color:var(--muted);margin-top:.25rem}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{font-size:.82rem;color:var(--muted);text-decoration:none;transition:color .2s}
+.footer-links a:hover{color:var(--greenlt)}
+.footer-copy{font-size:.75rem;color:var(--dimmed)}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  nav{padding:1rem 1.25rem}
+  .nav-links{display:none}
+  .why-grid{grid-template-columns:1fr}
+  .why-card{border-right:none;border-bottom:1.5px solid var(--border)}
+  .why-card:last-child{border-bottom:none}
+  .steps{grid-template-columns:1fr 1fr}
+  .tier-desc{display:none}
+  .perks{grid-template-columns:1fr}
+  .form-two{grid-template-columns:1fr}
+  .hero-stats{gap:1.5rem}
+  footer{flex-direction:column;text-align:center}
+}
+
+/* ── SUCCESS STATE ── */
+.success-state{display:none;text-align:center;padding:2rem}
+.success-state.visible{display:block}
+.success-icon{font-size:3rem;margin-bottom:1rem}
+.success-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.5rem;color:var(--green2);margin-bottom:.5rem}
+.success-sub{color:var(--muted);font-size:.9rem}
+
+/* ── SCROLL REVEAL ── */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* Platform badges */
+.platforms{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:2rem}
+.platform-badge{
+  display:flex;align-items:center;gap:6px;
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:8px;padding:.45rem .9rem;
+  font-size:.78rem;color:var(--muted);
+}
+.platform-badge .dot{width:7px;height:7px;border-radius:50%}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="leaf">🌿</div>
+    Earth Gang
+  </div>
+  <div class="nav-links">
+    <a href="#why">Why Join</a>
+    <a href="#how">How It Works</a>
+    <a href="#tiers">Creator Tiers</a>
+    <a href="#perks">Perks</a>
+  </div>
+  <a href="#join" class="nav-cta">Join Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+
+  <div class="hero-eyebrow">
+    <span></span>
+    Mamaearth × Creator Community
+  </div>
+
+  <h1 class="hero-title">
+    You're not a<br>
+    <span class="outline">follower</span>.<br>
+    You're <span class="green">Earth Gang</span>.
+  </h1>
+
+  <p class="hero-sub">
+    A Gen Z creator community built around real skincare, real routines, and real culture. Not a campaign. Not a hashtag. A movement you actually belong to.
+  </p>
+
+  <div class="hero-ctas">
+    <a href="#join" class="btn-primary">🌿 Join the Gang</a>
+    <a href="#how" class="btn-outline">See How It Works</a>
+  </div>
+
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">200+</div>
+      <div class="lbl">Active Creators</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">30M+</div>
+      <div class="lbl">Impressions / 6mo</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">500K+</div>
+      <div class="lbl">UGC Pieces</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">74%</div>
+      <div class="lbl">Gen Z Trust Creators</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Real Routines</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Good For You</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Good For Earth</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>#EarthGang</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Natural Skincare</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Creator Community</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Authentic Content</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Mamaearth</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Real Routines</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Good For You</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Good For Earth</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>#EarthGang</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Natural Skincare</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Creator Community</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Authentic Content</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Mamaearth</span>
+  </div>
+</div>
+
+<!-- WHY JOIN -->
+<section id="why">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Why Earth Gang</div>
+      <h2 class="section-title">This is culture, not content.</h2>
+      <p class="section-sub">Earth Gang isn't a one-off collab. It's an identity. We don't want your feed — we want your story.</p>
+    </div>
+
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-icon">🌱</div>
+        <div class="why-title">Community Over Campaign</div>
+        <div class="why-body">You're not posting for a brand. You're part of a movement of real people sharing real skincare. One that compounds and grows because members genuinely believe in it.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎯</div>
+        <div class="why-title">Your Voice Stays Yours</div>
+        <div class="why-body">No brand scripts. No corporate tone. Earth Gang gives you a brief and then steps back. Your audience trusts you — and we trust that too.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📈</div>
+        <div class="why-title">Creators Recruit Creators</div>
+        <div class="why-body">The flywheel is community-powered. As Earth Gang grows, your content gets amplified, reshared and featured — creating a compounding loop that benefits everyone in it.</div>
+      </div>
+    </div>
+
+    <div class="platforms reveal" style="margin-top:2.5rem">
+      <div class="platform-badge"><span class="dot" style="background:#e1306c"></span> Instagram</div>
+      <div class="platform-badge"><span class="dot" style="background:#ff0050"></span> TikTok</div>
+      <div class="platform-badge"><span class="dot" style="background:#ff0000"></span> YouTube</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how" class="how-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title">From apply to live in 10 days.</h2>
+    </div>
+    <div class="steps reveal">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-title">Apply & Get Onboarded</div>
+        <div class="step-body">Fill the form below. We check fit — not just follower count. Values, aesthetic, authenticity.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-title">Receive Your Brief</div>
+        <div class="step-body">Monthly creative prompts. Simple, flexible, intentionally loose so your content feels real.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-title">Create & Post</div>
+        <div class="step-body">Share your skincare routine, morning ritual, GRWM — whatever fits you. Tag #EarthGang.</div>
+        <div class="step-connector"></div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-title">Grow Together</div>
+        <div class="step-body">We amplify top content. The community reshares. Your reach compounds. Every month.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREATOR TIERS -->
+<section id="tiers">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">Creator Tiers</div>
+      <h2 class="section-title">Every size belongs here.</h2>
+      <p class="section-sub">We don't recruit based on follower count alone. Culture flows bottom-up. Nano creators often drive more trust than macro ones.</p>
+    </div>
+
+    <div class="tiers reveal">
+      <div class="tier-row">
+        <div class="tier-name">Nano</div>
+        <div class="tier-range-pill">1K – 10K</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" style="width:0" data-width="25%"></div></div>
+        <div class="tier-desc">Deepest trust. Highest engagement. Community seeding.</div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-name">Micro</div>
+        <div class="tier-range-pill">10K – 100K</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" style="width:0" data-width="50%"></div></div>
+        <div class="tier-desc">Sweet spot. Niche authority. Best for conversion quality.</div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-name">Mid-tier</div>
+        <div class="tier-range-pill">100K – 500K</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" style="width:0" data-width="70%"></div></div>
+        <div class="tier-desc">Scale with credibility. Brand storytelling at volume.</div>
+      </div>
+      <div class="tier-row">
+        <div class="tier-name">Macro</div>
+        <div class="tier-range-pill">500K+</div>
+        <div class="tier-bar-bg"><div class="tier-bar-fill" style="width:0" data-width="95%"></div></div>
+        <div class="tier-desc">Cultural signal. Launch moments and mass awareness.</div>
+      </div>
+    </div>
+
+    <div style="margin-top:1.5rem;padding:1rem 1.25rem;background:var(--green3);border:1px solid var(--green);border-radius:10px;font-size:.82rem;color:var(--greenlt)" class="reveal">
+      💰 Budget allocation: 60% nano/micro · 30% mid-tier · 10% macro. Culture flows from the ground up.
+    </div>
+  </div>
+</section>
+
+<!-- PERKS -->
+<section id="perks">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">What You Get</div>
+      <h2 class="section-title">More than a collab.</h2>
+      <p class="section-sub">Earth Gang members get access to resources, amplification, and a community — not just a product package.</p>
+    </div>
+
+    <div class="perks reveal">
+      <div class="perk">
+        <div class="perk-icon">📦</div>
+        <div>
+          <div class="perk-title">Product Seeding</div>
+          <div class="perk-body">Curated Mamaearth kits delivered to you. Authentic unboxings and honest reviews — no fake enthusiasm needed.</div>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🏆</div>
+        <div>
+          <div class="perk-title">Monthly UGC Challenges</div>
+          <div class="perk-body">Creative prompts every month. The best content gets featured on Mamaearth's official channels.</div>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">📊</div>
+        <div>
+          <div class="perk-title">Analytics & Reporting</div>
+          <div class="perk-body">Weekly performance snapshots so you can see your actual impact — reach, saves, conversions.</div>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🎟️</div>
+        <div>
+          <div class="perk-title">IRL Events & Pop-ups</div>
+          <div class="perk-body">Earth Gang meetups, creator-hosted experiences, and brand events. Community online and offline.</div>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🔗</div>
+        <div>
+          <div class="perk-title">Unique Creator Links & Codes</div>
+          <div class="perk-body">Track every purchase driven by your content. Your effort is measurable and credited directly to you.</div>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="perk-icon">🤝</div>
+        <div>
+          <div class="perk-title">Long-term Partnerships</div>
+          <div class="perk-body">We don't do one-offs. Earth Gang is built on ongoing relationships — not transactional deals.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto-section">
+  <div class="container reveal">
+    <div class="section-label">The Belief</div>
+    <div class="manifesto-text">
+      <span class="dim">Influence today</span> is built through<br>
+      <span class="hl">culture, trust, and community</span> —<br>
+      <span class="dim">not just advertisements.</span>
+    </div>
+    <div style="margin-top:2rem;font-size:.9rem;color:var(--muted);max-width:480px;line-height:1.7">
+      Not a campaign. A community.<br>
+      Not followers. Members.<br>
+      Not promotion. Identity.
+    </div>
+  </div>
+</section>
+
+<!-- JOIN FORM -->
+<section id="join" class="join-section">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label" style="justify-content:center">Apply Now</div>
+      <h2 class="section-title">Ready to join Earth Gang?</h2>
+      <p class="section-sub" style="margin:0 auto">Takes 2 minutes. We review every application personally and get back within 5 business days.</p>
+    </div>
+
+    <div class="form-card reveal" id="formCard">
+      <!-- FORM -->
+      <div id="formView">
+        <div class="form-two">
+          <div class="form-row">
+            <input type="text" id="fname" placeholder="First name" required>
+          </div>
+          <div class="form-row">
+            <input type="text" id="lname" placeholder="Last name" required>
+          </div>
+        </div>
+        <div class="form-row">
+          <input type="email" id="email" placeholder="your@email.com" required>
+        </div>
+        <div class="form-row">
+          <input type="text" id="insta" placeholder="Instagram handle (e.g. @yourhandle)" required>
+        </div>
+        <div class="form-row">
+          <select id="tier">
+            <option value="" disabled selected>Your follower count</option>
+            <option value="nano">Nano — 1K to 10K</option>
+            <option value="micro">Micro — 10K to 100K</option>
+            <option value="mid">Mid-tier — 100K to 500K</option>
+            <option value="macro">Macro — 500K+</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <select id="niche">
+            <option value="" disabled selected>Your content niche</option>
+            <option value="skincare">Skincare & Beauty</option>
+            <option value="lifestyle">Lifestyle & Wellness</option>
+            <option value="fashion">Fashion & OOTD</option>
+            <option value="fitness">Fitness & Health</option>
+            <option value="food">Food & Nutrition</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <button class="form-submit" onclick="handleSubmit()">🌿 Apply to Earth Gang</button>
+        <div class="form-note">By applying, you agree to be contacted about the Earth Gang community program. No spam, ever.</div>
+      </div>
+
+      <!-- SUCCESS -->
+      <div class="success-state" id="successView">
+        <div class="success-icon">🌿</div>
+        <div class="success-title">You're on the list.</div>
+        <div class="success-sub">We'll review your application and get back within 5 business days. Welcome to Earth Gang.</div>
+        <div style="margin-top:1.5rem;font-size:.78rem;color:var(--dimmed)">#EarthGang — good for you, good for earth</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-brand">🌿 Earth Gang × Mamaearth</div>
+    <div class="footer-tagline">#EarthGang — good for you, good for earth</div>
+  </div>
+  <div class="footer-links">
+    <a href="#why">About</a>
+    <a href="#how">How It Works</a>
+    <a href="#join">Apply</a>
+  </div>
+  <div class="footer-copy">© 2025 Mamaearth. All rights reserved.</div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+reveals.forEach(r => observer.observe(r));
+
+// Animate tier bars on scroll
+const tierBars = document.querySelectorAll('.tier-bar-fill');
+const barObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const target = e.target.dataset.width;
+      setTimeout(() => { e.target.style.width = target; }, 100);
+    }
+  });
+}, { threshold: 0.3 });
+tierBars.forEach(b => barObserver.observe(b));
+
+// Form
+function handleSubmit() {
+  const fname = document.getElementById('fname').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const insta = document.getElementById('insta').value.trim();
+  const tier = document.getElementById('tier').value;
+  const niche = document.getElementById('niche').value;
+
+  if (!fname || !email || !insta || !tier || !niche) {
+    alert('Please fill in all fields before applying.');
+    return;
+  }
+
+  document.getElementById('formView').style.display = 'none';
+  document.getElementById('successView').classList.add('visible');
+}
+</script>
+</body>
+</html>
